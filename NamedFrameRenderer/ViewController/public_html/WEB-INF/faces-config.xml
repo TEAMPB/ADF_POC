@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="2.1" xmlns="http://java.sun.com/xml/ns/javaee">
+  <application>
+    <default-render-kit-id>oracle.adf.rich</default-render-kit-id>
+  </application>
+    <render-kit>
+    <render-kit-id>oracle.adf.rich</render-kit-id>
+    <renderer>
+      <component-family>org.apache.myfaces.trinidad.Panel</component-family>
+      <renderer-type>oracle.adf.rich.GroupLayout</renderer-type>
+      <renderer-class>de.teampb.ir.templates.nf.NamedFrameRenderer</renderer-class>
+    </renderer>
+  </render-kit>
+</faces-config>

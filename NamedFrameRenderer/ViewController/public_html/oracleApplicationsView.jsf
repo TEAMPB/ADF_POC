@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+        xmlns:tlc="http://www.team-pb.de/templates/layoutComponents">
+  <af:document title="oracleApplicationsView.jsf" id="d1">
+    <af:messages id="m1"/>
+    <af:form id="f1">
+      <af:panelGridLayout id="pgl1">
+        <af:gridRow marginTop="5px" height="auto" id="gr1">
+          <af:gridCell marginStart="5px" columnSpan="2" id="gc1" width="34%">
+            <tlc:namedFrame title="Region" id="nf1" type="info">
+              <f:facet name="content">
+                <af:panelGroupLayout id="g1">
+                  <af:panelFormLayout id="pfl1" rows="1" styleClass="AFStretchWidth">
+                    <af:inputText value="#{bindings.RegionId.inputValue}" label="ID"
+                                  required="#{bindings.RegionId.hints.mandatory}"
+                                  columns="#{bindings.RegionId.hints.displayWidth}"
+                                  maximumLength="#{bindings.RegionId.hints.precision}"
+                                  shortDesc="#{bindings.RegionId.hints.tooltip}" id="it1">
+                      <f:validator binding="#{bindings.RegionId.validator}"/>
+                      <af:convertNumber groupingUsed="false" pattern="#{bindings.RegionId.format}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.RegionName.inputValue}" label="Name"
+                                  required="#{bindings.RegionName.hints.mandatory}"
+                                  columns="#{bindings.RegionName.hints.displayWidth}"
+                                  maximumLength="#{bindings.RegionName.hints.precision}"
+                                  shortDesc="#{bindings.RegionName.hints.tooltip}" id="it2">
+                      <f:validator binding="#{bindings.RegionName.validator}"/>
+                    </af:inputText>
+                  </af:panelFormLayout>
+                  <af:spacer width="75" height="10" id="s3"/>
+                </af:panelGroupLayout>
+              </f:facet>
+            </tlc:namedFrame>
+          </af:gridCell>
+          <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc2" halign="end">
+            <af:button text="Go ADF HR" id="b2" action="goHR"/>
+          </af:gridCell>
+        </af:gridRow>
+        <af:gridRow marginTop="5px" height="auto" id="gr2">
+          <af:gridCell marginStart="5px" width="auto" id="gc3" styleClass="AFStretchWidth">
+            <tlc:namedFrame title="Departments" id="nf2" type="important">
+              <f:facet name="content">
+                <af:table value="#{bindings.DepartmentsByRegion.collectionModel}" var="row"
+                          rows="#{bindings.DepartmentsByRegion.rangeSize}"
+                          emptyText="#{bindings.DepartmentsByRegion.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          rowBandingInterval="0"
+                          selectedRowKeys="#{bindings.DepartmentsByRegion.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.DepartmentsByRegion.collectionModel.makeCurrent}"
+                          rowSelection="single" fetchSize="#{bindings.DepartmentsByRegion.rangeSize}" id="t1" autoHeightRows="5"
+                          contentDelivery="immediate"
+                          width="240" columnStretching="column:c2">
+                  <af:column headerText="ID" id="c1" width="40">
+                    <af:inputText value="#{row.bindings.DepartmentId.inputValue}"
+                                  label="#{bindings.DepartmentsByRegion.hints.DepartmentId.label}"
+                                  required="#{bindings.DepartmentsByRegion.hints.DepartmentId.mandatory}"
+                                  columns="#{bindings.DepartmentsByRegion.hints.DepartmentId.displayWidth}"
+                                  maximumLength="#{bindings.DepartmentsByRegion.hints.DepartmentId.precision}"
+                                  shortDesc="#{bindings.DepartmentsByRegion.hints.DepartmentId.tooltip}" id="it3">
+                      <f:validator binding="#{row.bindings.DepartmentId.validator}"/>
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.DepartmentsByRegion.hints.DepartmentId.format}"/>
+                    </af:inputText>
+                    <f:facet name="header">
+                      <af:panelGroupLayout id="pgl3" halign="center">
+                        <af:outputLabel value="ID" id="ol2"/>
+                      </af:panelGroupLayout>
+                    </f:facet>
+                  </af:column>
+                  <af:column headerText="Name" id="c2" width="160">
+                    <af:inputText value="#{row.bindings.DepartmentName.inputValue}"
+                                  label="#{bindings.DepartmentsByRegion.hints.DepartmentName.label}"
+                                  required="#{bindings.DepartmentsByRegion.hints.DepartmentName.mandatory}"
+                                  columns="#{bindings.DepartmentsByRegion.hints.DepartmentName.displayWidth}"
+                                  maximumLength="#{bindings.DepartmentsByRegion.hints.DepartmentName.precision}"
+                                  shortDesc="#{bindings.DepartmentsByRegion.hints.DepartmentName.tooltip}" id="it4">
+                      <f:validator binding="#{row.bindings.DepartmentName.validator}"/>
+                    </af:inputText>
+                    <f:facet name="header">
+                      <af:panelGroupLayout id="pgl2" halign="center" layout="vertical">
+                        <af:outputLabel value="Name" id="ol1"/>
+                      </af:panelGroupLayout>
+                    </f:facet>
+                  </af:column>
+                </af:table>
+              </f:facet>
+            </tlc:namedFrame>
+          </af:gridCell>
+          <af:gridCell marginStart="195px" width="33%" id="gc4">
+            <af:panelGroupLayout id="pgl4" layout="vertical">
+              <af:spacer width="10" height="10" id="s1"/>
+              <af:panelFormLayout id="pfl2" labelAlignment="top">
+                <af:selectOneChoice label="Order Records By" id="soc1" value="ID">
+                  <af:selectItem label="ID Number" value="ID" id="si1"/>
+                </af:selectOneChoice>
+              </af:panelFormLayout>
+              <af:selectBooleanCheckbox text="Notify HR?" id="sbc1"/>
+              <f:facet name="separator">
+                <af:spacer width="10" height="25" id="s2"/>
+              </f:facet>
+              <af:button actionListener="#{bindings.CreateInsert.execute}" text="Add Employee"
+                         disabled="#{!bindings.CreateInsert.enabled}" id="b1"/>
+            </af:panelGroupLayout>
+          </af:gridCell>
+          <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc5"/>
+        </af:gridRow>
+        <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr3">
+          <af:gridCell marginStart="5px" columnSpan="3" marginEnd="5px" id="gc6" width="auto">
+            <tlc:namedFrame title="Employees" id="nf3" type="info">
+              <f:facet name="content">
+                <af:table value="#{bindings.EmployeesByDepartmentsViaRegion.collectionModel}" var="row"
+                          rows="#{bindings.EmployeesByDepartmentsViaRegion.rangeSize}"
+                          emptyText="#{bindings.EmployeesByDepartmentsViaRegion.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          rowBandingInterval="0"
+                          selectedRowKeys="#{bindings.EmployeesByDepartmentsViaRegion.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.EmployeesByDepartmentsViaRegion.collectionModel.makeCurrent}"
+                          rowSelection="single" fetchSize="#{bindings.EmployeesByDepartmentsViaRegion.rangeSize}"
+                          id="t2" autoHeightRows="5" contentDelivery="immediate" partialTriggers=":::nf2:t1 :::b1"
+                          styleClass="AFStretchWidth">
+                  <af:column headerText="#{bindings.EmployeesByDepartmentsViaRegion.hints.EmployeeId.label}" id="c3"
+                             width="48">
+                    <af:inputText value="#{row.bindings.EmployeeId.inputValue}"
+                                  label="#{bindings.EmployeesByDepartmentsViaRegion.hints.EmployeeId.label}"
+                                  required="#{bindings.EmployeesByDepartmentsViaRegion.hints.EmployeeId.mandatory}"
+                                  columns="#{bindings.EmployeesByDepartmentsViaRegion.hints.EmployeeId.displayWidth}"
+                                  maximumLength="#{bindings.EmployeesByDepartmentsViaRegion.hints.EmployeeId.precision}"
+                                  shortDesc="#{bindings.EmployeesByDepartmentsViaRegion.hints.EmployeeId.tooltip}"
+                                  id="it5">
+                      <f:validator binding="#{row.bindings.EmployeeId.validator}"/>
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.EmployeesByDepartmentsViaRegion.hints.EmployeeId.format}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column headerText="#{bindings.EmployeesByDepartmentsViaRegion.hints.LastName.label}" id="c4"
+                             width="132">
+                    <af:inputText value="#{row.bindings.LastName.inputValue}"
+                                  label="#{bindings.EmployeesByDepartmentsViaRegion.hints.LastName.label}"
+                                  required="#{bindings.EmployeesByDepartmentsViaRegion.hints.LastName.mandatory}"
+                                  columns="#{bindings.EmployeesByDepartmentsViaRegion.hints.LastName.displayWidth}"
+                                  maximumLength="#{bindings.EmployeesByDepartmentsViaRegion.hints.LastName.precision}"
+                                  shortDesc="#{bindings.EmployeesByDepartmentsViaRegion.hints.LastName.tooltip}"
+                                  id="it6">
+                      <f:validator binding="#{row.bindings.LastName.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column headerText="#{bindings.EmployeesByDepartmentsViaRegion.hints.FirstName.label}" id="c5"
+                             width="120">
+                    <af:inputText value="#{row.bindings.FirstName.inputValue}"
+                                  label="#{bindings.EmployeesByDepartmentsViaRegion.hints.FirstName.label}"
+                                  required="#{bindings.EmployeesByDepartmentsViaRegion.hints.FirstName.mandatory}"
+                                  columns="#{bindings.EmployeesByDepartmentsViaRegion.hints.FirstName.displayWidth}"
+                                  maximumLength="#{bindings.EmployeesByDepartmentsViaRegion.hints.FirstName.precision}"
+                                  shortDesc="#{bindings.EmployeesByDepartmentsViaRegion.hints.FirstName.tooltip}"
+                                  id="it7">
+                      <f:validator binding="#{row.bindings.FirstName.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column headerText="#{bindings.EmployeesByDepartmentsViaRegion.hints.JobId.label}" id="c6"
+                             width="145">
+                    <af:inputText value="#{row.bindings.JobId.inputValue}"
+                                  label="#{bindings.EmployeesByDepartmentsViaRegion.hints.JobId.label}"
+                                  required="#{bindings.EmployeesByDepartmentsViaRegion.hints.JobId.mandatory}"
+                                  columns="#{bindings.EmployeesByDepartmentsViaRegion.hints.JobId.displayWidth}"
+                                  maximumLength="#{bindings.EmployeesByDepartmentsViaRegion.hints.JobId.precision}"
+                                  shortDesc="#{bindings.EmployeesByDepartmentsViaRegion.hints.JobId.tooltip}" id="it8">
+                      <f:validator binding="#{row.bindings.JobId.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column headerText="#{bindings.EmployeesByDepartmentsViaRegion.hints.Salary.label}" id="c7"
+                             width="43">
+                    <af:inputText value="#{row.bindings.Salary.inputValue}"
+                                  label="#{bindings.EmployeesByDepartmentsViaRegion.hints.Salary.label}"
+                                  required="#{bindings.EmployeesByDepartmentsViaRegion.hints.Salary.mandatory}"
+                                  columns="#{bindings.EmployeesByDepartmentsViaRegion.hints.Salary.displayWidth}"
+                                  maximumLength="#{bindings.EmployeesByDepartmentsViaRegion.hints.Salary.precision}"
+                                  shortDesc="#{bindings.EmployeesByDepartmentsViaRegion.hints.Salary.tooltip}" id="it9">
+                      <f:validator binding="#{row.bindings.Salary.validator}"/>
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.EmployeesByDepartmentsViaRegion.hints.Salary.format}"/>
+                    </af:inputText>
+                  </af:column>
+                </af:table>
+              </f:facet>
+            </tlc:namedFrame>
+          </af:gridCell>
+        </af:gridRow>
+      </af:panelGridLayout>
+    </af:form>
+  </af:document>
+</f:view>

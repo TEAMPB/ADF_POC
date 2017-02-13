@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="DepartmentsByRegionView"
+  Version="12.2.1.20.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  SelectList="Regions.REGION_NAME, 
+       Regions.REGION_ID, 
+       Locations.LOCATION_ID, 
+       Departments.DEPARTMENT_ID, 
+       Departments.DEPARTMENT_NAME"
+  FromList="REGIONS Regions, LOCATIONS Locations, COUNTRIES Countries, DEPARTMENTS Departments"
+  Where="((Regions.REGION_ID = Countries.REGION_ID) AND (Countries.COUNTRY_ID = Locations.COUNTRY_ID)) AND (Locations.LOCATION_ID = Departments.LOCATION_ID)"
+  OrderBy="Departments.DEPARTMENT_ID">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="de.teampb.ir.model.queries.DepartmentsByRegionView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <EntityUsage
+    Name="Regions"
+    Entity="de.teampb.ir.model.entities.Regions"/>
+  <EntityUsage
+    Name="Locations"
+    Entity="de.teampb.ir.model.entities.Locations"
+    Association="de.teampb.ir.model.entities.assoc.LocationsToRegionsAssoc"
+    AssociationEnd="de.teampb.ir.model.entities.assoc.LocationsToRegionsAssoc.Locations"
+    SourceUsage="de.teampb.ir.model.queries.DepartmentsByRegionView.Regions"
+    ReadOnly="true"
+    Reference="true"
+    DeleteParticipant="false"
+    JoinType="INNER JOIN">
+    <DesignTime>
+      <AttrArray Name="_dstAttributes">
+        <Item Value="de.teampb.ir.model.entities.Locations.CountryId"/>
+      </AttrArray>
+      <AttrArray Name="_srcAttributes">
+        <Item Value="de.teampb.ir.model.entities.Regions.RegionId"/>
+      </AttrArray>
+    </DesignTime>
+  </EntityUsage>
+  <EntityUsage
+    Name="Departments"
+    Entity="de.teampb.ir.model.entities.Departments"
+    Association="de.teampb.ir.model.entities.assoc.DepartmentsToLocationAssoc"
+    AssociationEnd="de.teampb.ir.model.entities.assoc.DepartmentsToLocationAssoc.Departments"
+    SourceUsage="de.teampb.ir.model.queries.DepartmentsByRegionView.Locations"
+    ReadOnly="true"
+    Reference="true"
+    DeleteParticipant="false"
+    JoinType="INNER JOIN">
+    <DesignTime>
+      <AttrArray Name="_dstAttributes">
+        <Item Value="de.teampb.ir.model.entities.Departments.LocationId"/>
+      </AttrArray>
+      <AttrArray Name="_srcAttributes">
+        <Item Value="de.teampb.ir.model.entities.Locations.LocationId"/>
+      </AttrArray>
+    </DesignTime>
+  </EntityUsage>
+  <ViewAttribute
+    Name="RegionName"
+    PrecisionRule="true"
+    EntityAttrName="RegionName"
+    EntityUsage="Regions"
+    AliasName="REGION_NAME"/>
+  <ViewAttribute
+    Name="RegionId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="RegionId"
+    EntityUsage="Regions"
+    AliasName="REGION_ID"/>
+  <ViewAttribute
+    Name="LocationId"
+    IsUpdateable="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LocationId"
+    EntityUsage="Locations"
+    AliasName="LOCATION_ID"/>
+  <ViewAttribute
+    Name="DepartmentId"
+    IsUpdateable="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="DepartmentId"
+    EntityUsage="Departments"
+    AliasName="DEPARTMENT_ID"/>
+  <ViewAttribute
+    Name="DepartmentName"
+    IsUpdateable="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="DepartmentName"
+    EntityUsage="Departments"
+    AliasName="DEPARTMENT_NAME"/>
+  <ViewLinkAccessor
+    Name="EmployeesView"
+    ViewLink="de.teampb.ir.model.queries.link.EmployeesByDepartmentsViaRegionLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="de.teampb.ir.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

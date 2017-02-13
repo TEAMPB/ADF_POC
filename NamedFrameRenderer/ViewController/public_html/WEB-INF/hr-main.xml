@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="hr-main">
+    <default-activity>main</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <view id="main">
+      <page>/main.jsf</page>
+    </view>
+    <view id="employees">
+      <page>/employees.jsf</page>
+    </view>
+    <view id="oracleApplicationsView">
+      <page>/oracleApplicationsView.jsf</page>
+    </view>
+    <control-flow-rule id="__1">
+      <from-activity-id>main</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>showEmp</from-outcome>
+        <to-activity-id>employees</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__5">
+        <from-outcome>goOracleApps</from-outcome>
+        <to-activity-id>oracleApplicationsView</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__3">
+      <from-activity-id>employees</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>back</from-outcome>
+        <to-activity-id>main</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__6">
+      <from-activity-id>oracleApplicationsView</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>goHR</from-outcome>
+        <to-activity-id>main</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

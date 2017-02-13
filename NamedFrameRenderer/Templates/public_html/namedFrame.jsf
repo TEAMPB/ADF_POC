@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<af:componentDef xmlns:af="http://xmlns.oracle.com/adf/faces/rich" var="attrs" componentVar="comp"
+                 xmlns:afc="http://xmlns.oracle.com/adf/faces/rich/component" xmlns:f="http://java.sun.com/jsf/core"
+                 definition="private">
+    <af:xmlContent>
+        <afc:component>
+            <afc:description/>
+            <afc:display-name>namedFrame</afc:display-name>
+            <afc:component-class>de.teampb.ir.templates.nf.NamedFrame</afc:component-class>
+            <afc:facet>
+                <afc:facet-name>content</afc:facet-name>
+            </afc:facet>
+            <afc:attribute>
+                <afc:attribute-name>title</afc:attribute-name>
+                <afc:attribute-class>java.lang.String</afc:attribute-class>
+                <afc:required>true</afc:required>
+            </afc:attribute>
+            <afc:attribute>
+                <afc:attribute-name>
+                    type
+                </afc:attribute-name>
+                <afc:attribute-class>
+                    java.lang.String
+                </afc:attribute-class>
+                <afc:default-value>
+                    info
+                </afc:default-value>
+            </afc:attribute>
+            <afc:attribute>
+                <afc:attribute-name>
+                    layout
+                </afc:attribute-name>
+                <afc:attribute-class>
+                    java.lang.String
+                </afc:attribute-class>
+                <afc:default-value>
+                    horizontal
+                </afc:default-value>
+            </afc:attribute>
+            <afc:attribute>
+                <afc:attribute-name>
+                    hAlign
+                </afc:attribute-name>
+                <afc:attribute-class>
+                    java.lang.String
+                </afc:attribute-class>
+                <afc:default-value>
+                    default
+                </afc:default-value>
+            </afc:attribute>
+            <afc:attribute>
+                <afc:attribute-name>
+                    vAlign
+                </afc:attribute-name>
+                <afc:attribute-class>
+                    java.lang.String
+                </afc:attribute-class>
+                <afc:default-value>
+                    middle
+                </afc:default-value>
+            </afc:attribute>
+            <afc:attribute>
+                <afc:attribute-name>
+                    styleClass
+                </afc:attribute-name>
+                <afc:attribute-class>
+                    java.lang.String
+                </afc:attribute-class>
+            </afc:attribute>
+            <afc:component-extension>
+                <afc:component-tag-namespace>de.teampb.ir.templates.nf</afc:component-tag-namespace>
+                <afc:component-taglib-uri>http://www.team-pb.de/templates/layoutComponents</afc:component-taglib-uri>
+            </afc:component-extension>
+        </afc:component>
+    </af:xmlContent>
+    <af:panelGroupLayout id="dc_pgl1" layout="#{attrs.layout}" styleClass="#{attrs.styleClass}"
+                         halign="#{attrs.hAlign}" valign="#{attrs.vAlign}">
+        <af:facetRef facetName="content"/>
+    </af:panelGroupLayout>
+</af:componentDef>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="12.2.1.20.47" id="DataBindings"
+             SeparateXMLFiles="false" Package="de.teampb.ir.view" ClientType="Generic">
+  <pageMap>
+    <page path="/main.jsf" usageId="de_teampb_ir_view_mainPageDef"/>
+    <page path="/employees.jsf" usageId="de_teampb_ir_view_employeesPageDef"/>
+    <page path="/oracleApplicationsView.jsf" usageId="de_teampb_ir_view_oracleApplicationsViewPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="de_teampb_ir_view_mainPageDef" path="de.teampb.ir.view.pageDefs.mainPageDef"/>
+    <page id="de_teampb_ir_view_employeesPageDef" path="de.teampb.ir.view.pageDefs.employeesPageDef"/>
+    <page id="de_teampb_ir_view_oracleApplicationsViewPageDef"
+          path="de.teampb.ir.view.pageDefs.oracleApplicationsViewPageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <BC4JDataControl id="HRServiceDataControl" Package="de.teampb.ir.model.services"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true" Configuration="HRServiceLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

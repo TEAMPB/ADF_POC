@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="EmpDeptFkLink"
+  Version="12.2.1.20.47"
+  InheritPersonalization="merge"
+  EntityAssociation="de.teampb.ir.model.entities.assoc.EmpDeptFkAssoc">
+  <ViewLinkDefEnd
+    Name="DepartmentsView"
+    Cardinality="1"
+    Source="true"
+    Owner="de.teampb.ir.model.queries.DepartmentsView">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="DepartmentsView"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="de.teampb.ir.model.queries.DepartmentsView.DepartmentId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="EmployeesView"
+    Cardinality="-1"
+    Owner="de.teampb.ir.model.queries.EmployeesView">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="EmployeesView"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="de.teampb.ir.model.queries.EmployeesView.DepartmentId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+</ViewLink>

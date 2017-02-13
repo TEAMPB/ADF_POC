@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.20.47" id="mainPageDef"
+                Package="de.teampb.ir.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="Manager" RangeSize="25" DataControl="HRServiceDataControl" id="ManagerIterator"/>
+    <iterator Binds="DepartmentsView1" RangeSize="25" DataControl="HRServiceDataControl" id="DepartmentsView1Iterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="ManagerIterator" id="EmployeeId">
+      <AttrNames>
+        <Item Value="EmployeeId"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="DepartmentsView1Iterator" id="DepartmentsView1">
+      <nodeDefinition DefName="de.teampb.ir.model.queries.DepartmentsView" Name="DepartmentsView10">
+        <AttrNames>
+          <Item Value="DepartmentId"/>
+          <Item Value="DepartmentName"/>
+          <Item Value="LocationId"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="EmployeesView1"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="de.teampb.ir.model.queries.EmployeesView" Name="DepartmentsView11">
+        <AttrNames>
+          <Item Value="LastName"/>
+          <Item Value="FirstName"/>
+          <Item Value="Email"/>
+          <Item Value="PhoneNumber"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="ManagerIterator" id="FirstName">
+      <AttrNames>
+        <Item Value="FirstName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ManagerIterator" id="LastName">
+      <AttrNames>
+        <Item Value="LastName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ManagerIterator" id="Email">
+      <AttrNames>
+        <Item Value="Email"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ManagerIterator" id="PhoneNumber">
+      <AttrNames>
+        <Item Value="PhoneNumber"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

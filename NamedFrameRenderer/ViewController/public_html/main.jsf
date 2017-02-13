@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+        xmlns:tlc="http://www.team-pb.de/templates/layoutComponents">
+    <af:document title="main.jsf" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:panelCollection id="pc1">
+                <f:facet name="menus">
+                    <af:menu text="Oracle Apps" id="m2">
+                        <af:commandMenuItem text="Oracle HR" id="cmi1" action="goOracleApps"/>
+                    </af:menu>
+                </f:facet>
+                <f:facet name="toolbar">
+                    <af:toolbar id="t2">
+                        <af:button text="Show Employees" id="b1" action="showEmp"/>
+                    </af:toolbar>
+                </f:facet>
+                <f:facet name="statusbar"/>
+                <af:table value="#{bindings.DepartmentsView1.collectionModel}" var="row"
+                          rows="#{bindings.DepartmentsView1.rangeSize}"
+                          emptyText="#{bindings.DepartmentsView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          rowBandingInterval="0"
+                          selectedRowKeys="#{bindings.DepartmentsView1.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.DepartmentsView1.collectionModel.makeCurrent}"
+                          rowSelection="single" fetchSize="#{bindings.DepartmentsView1.rangeSize}" id="t1"
+                          columnStretching="column:c2">
+                    <af:column headerText="#{bindings.DepartmentsView1.hints.DepartmentId.label}" id="c1">
+                        <af:outputText value="#{row.DepartmentId}"
+                                       shortDesc="#{bindings.DepartmentsView1.hints.DepartmentId.tooltip}" id="ot1">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.DepartmentsView1.hints.DepartmentId.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column headerText="#{bindings.DepartmentsView1.hints.DepartmentName.label}" id="c2">
+                        <af:outputText value="#{row.DepartmentName}"
+                                       shortDesc="#{bindings.DepartmentsView1.hints.DepartmentName.tooltip}" id="ot2"/>
+                    </af:column>
+                    <af:column headerText="#{bindings.DepartmentsView1.hints.LocationId.label}" id="c3">
+                        <af:outputText value="#{row.LocationId}"
+                                       shortDesc="#{bindings.DepartmentsView1.hints.LocationId.tooltip}" id="ot3">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.DepartmentsView1.hints.LocationId.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <f:facet name="detailStamp">
+                        <af:panelGroupLayout id="pgl1" rendered="#{row.EmployeesView1 ne null}">
+                            <tlc:namedFrame title="Manager" id="nf1">
+                                <f:facet name="content">
+                                    <af:panelFormLayout id="pfl1" shortDesc="Manager" rows="1" maxColumns="6"
+                                                        fieldWidth="200" labelWidth="100">
+                                        <af:inputText value="#{row.EmployeesView1.FirstName}"
+                                                      label="#{bindings.FirstName.hints.label}"
+                                                      required="#{bindings.FirstName.hints.mandatory}" readOnly="true"
+                                                      columns="#{bindings.FirstName.hints.displayWidth}"
+                                                      maximumLength="#{bindings.FirstName.hints.precision}"
+                                                      shortDesc="#{bindings.FirstName.hints.tooltip}" id="it1">
+                                            <f:validator binding="#{bindings.FirstName.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{row.EmployeesView1.LastName}"
+                                                      label="#{bindings.LastName.hints.label}"
+                                                      required="#{bindings.LastName.hints.mandatory}" readOnly="true"
+                                                      columns="#{bindings.LastName.hints.displayWidth}"
+                                                      maximumLength="#{bindings.LastName.hints.precision}"
+                                                      shortDesc="#{bindings.LastName.hints.tooltip}" id="it2">
+                                            <f:validator binding="#{bindings.LastName.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{row.EmployeesView1.Email}"
+                                                      label="#{bindings.Email.hints.label}"
+                                                      required="#{bindings.Email.hints.mandatory}" readOnly="true"
+                                                      columns="#{bindings.Email.hints.displayWidth}"
+                                                      maximumLength="#{bindings.Email.hints.precision}"
+                                                      shortDesc="#{bindings.Email.hints.tooltip}" id="it3">
+                                            <f:validator binding="#{bindings.Email.validator}"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{row.EmployeesView1.PhoneNumber}"
+                                                      label="#{bindings.PhoneNumber.hints.label}"
+                                                      required="#{bindings.PhoneNumber.hints.mandatory}" readOnly="true"
+                                                      columns="#{bindings.PhoneNumber.hints.displayWidth}"
+                                                      maximumLength="#{bindings.PhoneNumber.hints.precision}"
+                                                      shortDesc="#{bindings.PhoneNumber.hints.tooltip}" id="it4">
+                                            <f:validator binding="#{bindings.PhoneNumber.validator}"/>
+                                        </af:inputText>
+                                    </af:panelFormLayout>
+                                </f:facet>
+                            </tlc:namedFrame>
+                        </af:panelGroupLayout>
+                    </f:facet>
+                </af:table>
+                <f:facet name="viewMenu"/>
+            </af:panelCollection>
+        </af:form>
+    </af:document>
+</f:view>
